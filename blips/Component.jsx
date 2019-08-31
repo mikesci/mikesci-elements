@@ -20,7 +20,8 @@ export default class extends React.Component {
             { "name": "blipSpeedVariance", "displayName": "Speed Variance", "type": "slider", "defaultValue": 10 , min: 1, max: 20 },
             { "group": "Twitch Integration", "items": [
                 { "name": "channel", "displayName": "Channel", "type": "text" },
-                { "name": "debugMode", "displayName": "Debug Mode", "type": "checkbox", "defaultValue": false }
+                { "name": "debugMode", "displayName": "Debug Mode", "type": "checkbox", "defaultValue": false },
+                { "name": "colorDuration", "displayName": "Color Duration (sec.)", "type": "slider", "defaultValue": 60, min: 1, max: 600 },
             ]}
         ]
     };
@@ -28,6 +29,7 @@ export default class extends React.Component {
     _lastProps = {};
     _tmi;
     _chatBlipPointer = 0;
+    _interval;
 
     constructor(props) {
         super(props);
@@ -90,6 +92,9 @@ export default class extends React.Component {
 
             // set the new color
             blipRef.style.fill = `rgba(${r}, ${g}, ${b}, ${a})`;
+
+            // set a last-set attribute to allow the blips to be reset after a time
+            blipRef.setAttribute("last-set", Date.now());
         }
     }
 
@@ -103,7 +108,7 @@ export default class extends React.Component {
         (blipCount, blipSpeed, blipSpeedVariance, blipColor, blipHeight) => {
             let blips = [];
             for(let i = 0; i < blipCount; i++) {
-                let animationDuration = (101 - blipSpeed) + (Math.random() * blipSpeedVariance);
+                let animationDuration = (110 - blipSpeed) / (1 + (Math.random() * (blipSpeedVariance / 10)));
                 blips.push({
                     animationDuration: (animationDuration) + "s",
                     animationDelay: -(Math.random() * animationDuration) + "s",
@@ -117,6 +122,32 @@ export default class extends React.Component {
             return blips;
         }
     );
+
+    memoizeInterval = memoize(
+        colorDuration => {
+            if (this._interval) { clearInterval(this._interval); this._interval = null; }
+            this._interval = setInterval(() => {
+
+                let cutOffTime = Date.now() - (colorDuration * 1000);
+
+                for(let ref in this.refs) {
+                    if (ref.startsWith("blip")) {
+                        let lastSet = this.refs[ref].getAttribute("last-set");
+                        if (lastSet) {
+                            let lastSetDate = parseInt(lastSet);
+                            if (lastSetDate < cutOffTime) {
+                                let blip = this.refs[ref];
+                                blip.style.fill = this.props.blipColor;
+                                blip.setAttribute("last-set", null);
+                            }
+                        }
+                    }
+                }
+
+            }, 1000); // check every second
+            return this._interval;
+        }
+    )
 
     propToInt(propVal, defaultValue) {
         if (!propVal) { return defaultValue; }
@@ -132,6 +163,9 @@ export default class extends React.Component {
         let blipSpeed = this.propToInt(this.props.blipSpeed);
         let blipSpeedVariance = this.propToInt(this.props.blipSpeedVariance);
         let blips = this.memoizeBlips(blipCount, blipSpeed, blipSpeedVariance, this.props.blipColor, blipHeight);
+
+        // ensure we have an interval started
+        let interval = this.memoizeInterval(this.props.colorDuration);
 
         let blipElements = blips.map(blip => {
             return (<rect className="blip" x={0} y={blip.top} width={blip.width} height={blip.height} ref={blip.refName} style={{ fill: blip.color, animationDuration: blip.animationDuration, animationDelay: blip.animationDelay }} key={blip.refName} />);

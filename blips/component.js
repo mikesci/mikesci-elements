@@ -2539,6 +2539,8 @@ function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "_chatBlipPointer", 0);
 
+    _defineProperty(_assertThisInitialized(_this), "_interval", void 0);
+
     _defineProperty(_assertThisInitialized(_this), "processMessage", function (channel, user, message, self) {
       if (_this.props.debugMode) {
         console.log({
@@ -2560,7 +2562,9 @@ function (_React$Component) {
         var a = _this.extractOpacity(blipRef.style.fill); // set the new color
 
 
-        blipRef.style.fill = "rgba(".concat(r, ", ").concat(g, ", ").concat(b, ", ").concat(a, ")");
+        blipRef.style.fill = "rgba(".concat(r, ", ").concat(g, ", ").concat(b, ", ").concat(a, ")"); // set a last-set attribute to allow the blips to be reset after a time
+
+        blipRef.setAttribute("last-set", Date.now());
       }
     });
 
@@ -2578,7 +2582,7 @@ function (_React$Component) {
       var blips = [];
 
       for (var i = 0; i < blipCount; i++) {
-        var animationDuration = 101 - blipSpeed + Math.random() * blipSpeedVariance;
+        var animationDuration = (110 - blipSpeed) / (1 + Math.random() * (blipSpeedVariance / 10));
         blips.push({
           animationDuration: animationDuration + "s",
           animationDelay: -(Math.random() * animationDuration) + "s",
@@ -2591,6 +2595,35 @@ function (_React$Component) {
       }
 
       return blips;
+    }));
+
+    _defineProperty(_assertThisInitialized(_this), "memoizeInterval", memoize_one_esm(function (colorDuration) {
+      if (_this._interval) {
+        clearInterval(_this._interval);
+        _this._interval = null;
+      }
+
+      _this._interval = setInterval(function () {
+        var cutOffTime = Date.now() - colorDuration * 1000;
+
+        for (var ref in _this.refs) {
+          if (ref.startsWith("blip")) {
+            var lastSet = _this.refs[ref].getAttribute("last-set");
+
+            if (lastSet) {
+              var lastSetDate = parseInt(lastSet);
+
+              if (lastSetDate < cutOffTime) {
+                var blip = _this.refs[ref];
+                blip.style.fill = _this.props.blipColor;
+                blip.setAttribute("last-set", null);
+              }
+            }
+          }
+        }
+      }, 1000); // check every second
+
+      return _this._interval;
     }));
 
     _this.state = {
@@ -2668,7 +2701,9 @@ function (_React$Component) {
       var blipHeight = this.propToInt(this.props.blipHeight);
       var blipSpeed = this.propToInt(this.props.blipSpeed);
       var blipSpeedVariance = this.propToInt(this.props.blipSpeedVariance);
-      var blips = this.memoizeBlips(blipCount, blipSpeed, blipSpeedVariance, this.props.blipColor, blipHeight);
+      var blips = this.memoizeBlips(blipCount, blipSpeed, blipSpeedVariance, this.props.blipColor, blipHeight); // ensure we have an interval started
+
+      var interval = this.memoizeInterval(this.props.colorDuration);
       var blipElements = blips.map(function (blip) {
         return external_React_default.a.createElement("rect", {
           className: "blip",
@@ -2761,6 +2796,13 @@ _defineProperty(blips_Component_default, "manifest", {
       "displayName": "Debug Mode",
       "type": "checkbox",
       "defaultValue": false
+    }, {
+      "name": "colorDuration",
+      "displayName": "Color Duration (sec.)",
+      "type": "slider",
+      "defaultValue": 60,
+      min: 1,
+      max: 600
     }]
   }]
 });
