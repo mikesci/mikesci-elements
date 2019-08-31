@@ -121,7 +121,7 @@ if(false) {}
 
 exports = module.exports = __webpack_require__(3)(false);
 // Module
-exports.push([module.i, "@keyframes moveblip {\r\n    0% { transform: translateX(-15vw) }\r\n    100% { transform: translateX(100vw) }\r\n}\r\n\r\n.blip-container { height: 100%; width: 100%; overflow: hidden; position: relative; }\r\n.blip { animation: moveblip 100s linear infinite; fill: \"#fff\" }", ""]);
+exports.push([module.i, "@keyframes moveblip {\r\n    0% { transform: translateX(-15vw) }\r\n    100% { transform: translateX(100vw) }\r\n}\r\n\r\n.blip-container { height: 100%; width: 100%; overflow: hidden; position: relative; }\r\n.blip { animation: moveblip 100s linear infinite; transition: fill 1s linear; }", ""]);
 
 
 /***/ }),
@@ -2557,10 +2557,10 @@ function (_React$Component) {
         var blipIndex = _this._chatBlipPointer++ % _this.props.blipCount;
         var blipRef = _this.refs["blip" + blipIndex]; // pull it's opacity
 
-        var a = _this.extractOpacity(blipRef.getAttribute("fill")); // set the new color
+        var a = _this.extractOpacity(blipRef.style.fill); // set the new color
 
 
-        blipRef.setAttribute("fill", "rgba(".concat(r, ", ").concat(g, ", ").concat(b, ", ").concat(a, ")"));
+        blipRef.style.fill = "rgba(".concat(r, ", ").concat(g, ", ").concat(b, ", ").concat(a, ")");
       }
     });
 
@@ -2677,8 +2677,8 @@ function (_React$Component) {
           width: blip.width,
           height: blip.height,
           ref: blip.refName,
-          fill: blip.color,
           style: {
+            fill: blip.color,
             animationDuration: blip.animationDuration,
             animationDelay: blip.animationDelay
           },
