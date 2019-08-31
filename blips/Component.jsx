@@ -134,7 +134,7 @@ export default class extends React.Component {
         let blips = this.memoizeBlips(blipCount, blipSpeed, blipSpeedVariance, this.props.blipColor, blipHeight);
 
         let blipElements = blips.map(blip => {
-            return (<rect className="blip" x={0} y={blip.top} width={blip.width} height={blip.height} ref={blip.refName} fill={blip.color} style={{ animationDuration: blip.animationDuration, animationDelay: blip.animationDelay }} />);
+            return (<rect className="blip" x={0} y={blip.top} width={blip.width} height={blip.height} ref={blip.refName} fill={blip.color} style={{ animationDuration: blip.animationDuration, animationDelay: blip.animationDelay }} key={blip.refName} />);
         });
 
         return (

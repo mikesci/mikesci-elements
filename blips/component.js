@@ -2681,7 +2681,8 @@ function (_React$Component) {
           style: {
             animationDuration: blip.animationDuration,
             animationDelay: blip.animationDelay
-          }
+          },
+          key: blip.refName
         });
       });
       return external_React_default.a.createElement("svg", {
