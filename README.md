@@ -1,2 +1,2 @@
-# mikesci-elements
-A collection of Open Overlay elements I've written
+# open-overlay-external-elements
+Sample external elements for Open Overlay
