@@ -1,0 +1,7 @@
+@keyframes moveblip {
+    0% { transform: translateX(-15vw) }
+    100% { transform: translateX(100vw) }
+}
+
+.blip-container { height: 100%; width: 100%; overflow: hidden; position: relative; }
+.blip { animation: moveblip 100s linear infinite; transition: fill 1s linear; }

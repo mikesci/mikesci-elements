@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -91,49 +91,7 @@
 module.exports = React;
 
 /***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function areInputsEqual(newInputs, lastInputs) {
-    if (newInputs.length !== lastInputs.length) {
-        return false;
-    }
-    for (var i = 0; i < newInputs.length; i++) {
-        if (newInputs[i] !== lastInputs[i]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-function memoizeOne(resultFn, isEqual) {
-    if (isEqual === void 0) { isEqual = areInputsEqual; }
-    var lastThis;
-    var lastArgs = [];
-    var lastResult;
-    var calledOnce = false;
-    function memoized() {
-        var newArgs = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            newArgs[_i] = arguments[_i];
-        }
-        if (calledOnce && lastThis === this && isEqual(newArgs, lastArgs)) {
-            return lastResult;
-        }
-        lastResult = resultFn.apply(this, newArgs);
-        calledOnce = true;
-        lastThis = this;
-        lastArgs = newArgs;
-        return lastResult;
-    }
-    return memoized;
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (memoizeOne);
-
-
-/***/ }),
+/* 1 */,
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -755,7 +713,11 @@ module.exports = g;
 
 
 /***/ }),
-/* 6 */
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -763,12 +725,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _default; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var memoize_one__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _Component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
-/* harmony import */ var _Component_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Component_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _tmi_min_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
-/* harmony import */ var _tmi_min_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_tmi_min_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _Component_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Component_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _tmi_min_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13);
+/* harmony import */ var _tmi_min_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_tmi_min_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
+/* harmony import */ var vm__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vm__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -793,6 +764,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var _default =
 /*#__PURE__*/
 function (_React$Component) {
@@ -805,13 +777,25 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(_default).call(this, props));
 
+    _defineProperty(_assertThisInitialized(_this), "_letterGradesMapping", {
+      "a": 4.0,
+      "a+": 4.3,
+      "a-": 3.7,
+      "b": 3,
+      "b+": 3.3,
+      "b-": 2.7,
+      "c": 2,
+      "c+": 2.3,
+      "c-": 1.7,
+      "d": 1,
+      "d+": 1.3,
+      "d-": 0.7,
+      "f": 0
+    });
+
     _defineProperty(_assertThisInitialized(_this), "_lastProps", {});
 
     _defineProperty(_assertThisInitialized(_this), "_tmi", void 0);
-
-    _defineProperty(_assertThisInitialized(_this), "_chatBlipPointer", 0);
-
-    _defineProperty(_assertThisInitialized(_this), "_interval", void 0);
 
     _defineProperty(_assertThisInitialized(_this), "processMessage", function (channel, user, message, self) {
       if (_this.props.debugMode) {
@@ -822,86 +806,77 @@ function (_React$Component) {
         });
       }
 
-      if (user.color && user.color.length == 7) {
-        // convert the user's color to RGB
-        var r = parseInt("0x" + user.color.substr(1, 2));
-        var g = parseInt("0x" + user.color.substr(3, 2));
-        var b = parseInt("0x" + user.color.substr(5, 2)); // grab a blip, round-robin style
-
-        var blipIndex = _this._chatBlipPointer++ % _this.props.blipCount;
-        var blipRef = _this.refs["blip" + blipIndex]; // pull it's opacity
-
-        var a = _this.extractOpacity(blipRef.style.fill); // set the new color
+      _this.setState(function (prevState) {
+        var votes = _toConsumableArray(prevState.votes); // [ { user: "mikesci", grade: 4.3 } ]
 
 
-        blipRef.style.fill = "rgba(".concat(r, ", ").concat(g, ", ").concat(b, ", ").concat(a, ")"); // set a last-set attribute to allow the blips to be reset after a time
+        var gradePoint;
 
-        blipRef.setAttribute("last-set", Date.now());
-      }
-    });
+        if (_this.props.scale == "letterGrades") {
+          gradePoint = _this.letterToNumber(message);
+        } else if (_this.props.scale == "oneToTen") {
+          gradePoint = parseFloat(message);
+          if (gradePoint < 0 || gradePoint > 10) gradePoint = null;
+        }
 
-    _defineProperty(_assertThisInitialized(_this), "extractOpacity", function (color) {
-      var m = color.match(/^rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+\.?\d*)\s*\)$/i);
-
-      if (!m) {
-        return 1;
-      }
-
-      return parseFloat(m[4]);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "memoizeBlips", Object(memoize_one__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(function (blipCount, blipSpeed, blipSpeedVariance, blipColor, blipHeight) {
-      var blips = [];
-
-      for (var i = 0; i < blipCount; i++) {
-        var animationDuration = (110 - blipSpeed) / (1 + Math.random() * (blipSpeedVariance / 10));
-        blips.push({
-          animationDuration: animationDuration + "s",
-          animationDelay: -(Math.random() * animationDuration) + "s",
-          top: Math.random() * 95 + "%",
-          width: Math.random() * 10 + 5 + "%",
-          height: blipHeight + "%",
-          color: blipColor,
-          refName: "blip" + i
+        if (gradePoint == null || isNaN(gradePoint)) return null;
+        var vote = votes.find(function (r) {
+          return r.user == user.username;
         });
-      }
 
-      return blips;
-    }));
+        if (!vote) {
+          vote = {
+            user: user.username,
+            grade: gradePoint
+          };
+          votes.push(vote);
+        } else {
+          vote.grade = gradePoint;
+        }
 
-    _defineProperty(_assertThisInitialized(_this), "memoizeInterval", Object(memoize_one__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(function (colorDuration) {
-      if (_this._interval) {
-        clearInterval(_this._interval);
-        _this._interval = null;
-      }
+        var voteAverage = 0;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
-      _this._interval = setInterval(function () {
-        var cutOffTime = Date.now() - colorDuration * 1000;
-
-        for (var ref in _this.refs) {
-          if (ref.startsWith("blip")) {
-            var lastSet = _this.refs[ref].getAttribute("last-set");
-
-            if (lastSet) {
-              var lastSetDate = parseInt(lastSet);
-
-              if (lastSetDate < cutOffTime) {
-                var blip = _this.refs[ref];
-                blip.style.fill = _this.props.blipColor;
-                blip.setAttribute("last-set", null);
-              }
+        try {
+          for (var _iterator = votes[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var _vote = _step.value;
+            voteAverage += _vote.grade;
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
             }
           }
         }
-      }, 1000); // check every second
 
-      return _this._interval;
-    }));
+        voteAverage /= votes.length;
+        var computedGrade;
+        if (_this.props.scale == "letterGrades") computedGrade = _this.numberToLetter(voteAverage);else computedGrade = voteAverage.toFixed(1);
+        console.log({
+          votes: votes,
+          computedGrade: computedGrade
+        });
+        return {
+          votes: votes,
+          computedGrade: computedGrade
+        };
+      });
+    });
 
     _this.state = {
       channel: null,
-      blips: [],
-      userBlips: []
+      votes: [],
+      computedGrade: null
     }; // connect to tmi
 
     _this.updateTmiState();
@@ -952,59 +927,136 @@ function (_React$Component) {
       this._lastProps = this.props;
     }
   }, {
-    key: "propToInt",
-    value: function propToInt(propVal, defaultValue) {
-      if (!propVal) {
-        return defaultValue;
+    key: "letterToNumber",
+    value: function letterToNumber(message) {
+      if (message.lastIndexOf("msciA") > -1) {
+        return 4.3;
       }
 
-      var parsedVal = parseInt(propVal);
-
-      if (isNaN(parsedVal)) {
-        return defaultValue;
+      if (message.lastIndexOf("msciF") > -1) {
+        return 0;
       }
 
-      return parsedVal;
+      var lowerMsg = message.toLowerCase();
+      var checkSign = lowerMsg.length > 1;
+
+      switch (lowerMsg[0]) {
+        case "a":
+          if (!checkSign) {
+            return 4;
+          } else if (lowerMsg[1] == "+") {
+            return 4.3;
+          } else if (lowerMsg[1] == "-") {
+            return 3.7;
+          }
+
+          return 4;
+
+        case "b":
+          if (!checkSign) {
+            return 3;
+          } else if (lowerMsg[1] == "+") {
+            return 3.3;
+          } else if (lowerMsg[1] == "-") {
+            return 2.7;
+          }
+
+          return 3;
+
+        case "c":
+          if (!checkSign) {
+            return 2;
+          } else if (lowerMsg[1] == "+") {
+            return 2.3;
+          } else if (lowerMsg[1] == "-") {
+            return 1.7;
+          }
+
+          return 2;
+
+        case "d":
+          if (!checkSign) {
+            return 1;
+          } else if (lowerMsg[1] == "+") {
+            return 1.3;
+          } else if (lowerMsg[1] == "-") {
+            return 0.7;
+          }
+
+          return 1;
+
+        case "f":
+          return 0;
+
+        default:
+          return null;
+      }
+    }
+  }, {
+    key: "numberToLetter",
+    value: function numberToLetter(num) {
+      if (num == 4.3) {
+        return "A+";
+      }
+
+      if (num >= 4.0) {
+        return "A";
+      }
+
+      if (num >= 3.7) {
+        return "A-";
+      }
+
+      if (num >= 3.3) {
+        return "B+";
+      }
+
+      if (num >= 3.0) {
+        return "B";
+      }
+
+      if (num >= 2.7) {
+        return "B-";
+      }
+
+      if (num >= 2.3) {
+        return "C+";
+      }
+
+      if (num >= 2.0) {
+        return "C";
+      }
+
+      if (num >= 1.7) {
+        return "C-";
+      }
+
+      if (num >= 1.3) {
+        return "D+";
+      }
+
+      if (num >= 1.0) {
+        return "D";
+      }
+
+      if (num >= 0.7) {
+        return "D-";
+      }
+
+      return "F";
     }
   }, {
     key: "render",
     value: function render() {
-      var blipCount = this.propToInt(this.props.blipCount);
-      var blipHeight = this.propToInt(this.props.blipHeight);
-      var blipSpeed = this.propToInt(this.props.blipSpeed);
-      var blipSpeedVariance = this.propToInt(this.props.blipSpeedVariance);
-      var blips = this.memoizeBlips(blipCount, blipSpeed, blipSpeedVariance, this.props.blipColor, blipHeight); // ensure we have an interval started
-
-      var interval = this.memoizeInterval(this.props.colorDuration);
-      var blipElements = blips.map(function (blip) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("rect", {
-          className: "blip",
-          x: 0,
-          y: blip.top,
-          width: blip.width,
-          height: blip.height,
-          ref: blip.refName,
-          style: {
-            fill: blip.color,
-            animationDuration: blip.animationDuration,
-            animationDelay: blip.animationDelay
-          },
-          key: blip.refName
-        });
-      });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-        version: "1.1",
-        viewBox: "0 0 1920 1080",
-        xmlns: "http://www.w3.org/2000/svg",
-        className: "blipContainer"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("defs", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("filter", {
-        id: "blur1"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("feGaussianBlur", {
-        "in": "SourceGraphic",
-        stdDeviation: this.props.blur + ",0"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", {
-        filter: "url(#blur1)"
-      }, blipElements));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          textAlign: "center"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: Object.assign({}, this.props.gradeFont, this.props.gradeStyle)
+      }, this.state.computedGrade), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: Object.assign({}, this.props.countFont, this.props.countStyle)
+      }, this.state.votes.length, " vote", this.state.votes.length == 1 ? "" : "s"));
     }
   }]);
 
@@ -1012,51 +1064,23 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 _defineProperty(_default, "manifest", {
-  "name": "Blips Background",
+  "name": "Grades/Ratings",
   "author": "MikeSci",
-  "description": "An animated background that gets it's color information from Twitch chat.",
-  "width": 1920,
-  "height": 1080,
+  "description": "A mechanism to grade or rate anything.",
+  "width": 300,
+  "height": 300,
   "parameters": [{
-    "name": "blipColor",
-    "displayName": "Blip Color",
-    "type": "color",
-    "defaultValue": "rgba(255,255,255,0.5)"
-  }, {
-    "name": "blur",
-    "displayName": "Blur",
-    "type": "slider",
-    "defaultValue": 6,
-    min: 1,
-    max: 20
-  }, {
-    "name": "blipCount",
-    "displayName": "Blip Count",
-    "type": "slider",
-    "defaultValue": 60,
-    min: 1,
-    max: 200
-  }, {
-    "name": "blipHeight",
-    "displayName": "Blip Height",
-    "type": "slider",
-    "defaultValue": 4,
-    min: 1,
-    max: 10
-  }, {
-    "name": "blipSpeed",
-    "displayName": "Blip Speed",
-    "type": "slider",
-    "defaultValue": 35,
-    min: 1,
-    max: 100
-  }, {
-    "name": "blipSpeedVariance",
-    "displayName": "Speed Variance",
-    "type": "slider",
-    "defaultValue": 10,
-    min: 1,
-    max: 20
+    "name": "scale",
+    "displayName": "Scale",
+    "type": "select",
+    "options": [{
+      label: "Letter Grades (A+ through F-)",
+      value: "letterGrades"
+    }, {
+      label: "1 to 10",
+      value: "oneToTen"
+    }],
+    "defaultValue": "letterGrades"
   }, {
     "group": "Twitch Integration",
     "items": [{
@@ -1068,25 +1092,40 @@ _defineProperty(_default, "manifest", {
       "displayName": "Debug Mode",
       "type": "checkbox",
       "defaultValue": false
-    }, {
-      "name": "colorDuration",
-      "displayName": "Color Duration (sec.)",
-      "type": "slider",
-      "defaultValue": 60,
-      min: 1,
-      max: 600
     }]
+  }, {
+    "name": "gradeStyle",
+    "displayName": "Grade Style",
+    "type": "style"
+  }, {
+    "name": "gradeFont",
+    "displayName": "Grade Font",
+    "type": "font",
+    "defaultValue": {
+      fontSize: "144px"
+    }
+  }, {
+    "name": "countStyle",
+    "displayName": "Count Style",
+    "type": "style"
+  }, {
+    "name": "countFont",
+    "displayName": "Count Font",
+    "type": "font",
+    "defaultValue": {
+      fontSize: "72px"
+    }
   }]
 });
 
 
 
 /***/ }),
-/* 7 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(8);
+var content = __webpack_require__(12);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -1107,7 +1146,7 @@ if(content.locals) module.exports = content.locals;
 if(false) {}
 
 /***/ }),
-/* 8 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -1116,7 +1155,7 @@ exports.push([module.i, "@keyframes moveblip {\r\n    0% { transform: translateX
 
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var require;var require;function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2808,6 +2847,161 @@ exports.push([module.i, "@keyframes moveblip {\r\n    0% { transform: translateX
   }, {}]
 }, {}, [1]);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5)))
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+var indexOf = function (xs, item) {
+    if (xs.indexOf) return xs.indexOf(item);
+    else for (var i = 0; i < xs.length; i++) {
+        if (xs[i] === item) return i;
+    }
+    return -1;
+};
+var Object_keys = function (obj) {
+    if (Object.keys) return Object.keys(obj)
+    else {
+        var res = [];
+        for (var key in obj) res.push(key)
+        return res;
+    }
+};
+
+var forEach = function (xs, fn) {
+    if (xs.forEach) return xs.forEach(fn)
+    else for (var i = 0; i < xs.length; i++) {
+        fn(xs[i], i, xs);
+    }
+};
+
+var defineProp = (function() {
+    try {
+        Object.defineProperty({}, '_', {});
+        return function(obj, name, value) {
+            Object.defineProperty(obj, name, {
+                writable: true,
+                enumerable: false,
+                configurable: true,
+                value: value
+            })
+        };
+    } catch(e) {
+        return function(obj, name, value) {
+            obj[name] = value;
+        };
+    }
+}());
+
+var globals = ['Array', 'Boolean', 'Date', 'Error', 'EvalError', 'Function',
+'Infinity', 'JSON', 'Math', 'NaN', 'Number', 'Object', 'RangeError',
+'ReferenceError', 'RegExp', 'String', 'SyntaxError', 'TypeError', 'URIError',
+'decodeURI', 'decodeURIComponent', 'encodeURI', 'encodeURIComponent', 'escape',
+'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'undefined', 'unescape'];
+
+function Context() {}
+Context.prototype = {};
+
+var Script = exports.Script = function NodeScript (code) {
+    if (!(this instanceof Script)) return new Script(code);
+    this.code = code;
+};
+
+Script.prototype.runInContext = function (context) {
+    if (!(context instanceof Context)) {
+        throw new TypeError("needs a 'context' argument.");
+    }
+    
+    var iframe = document.createElement('iframe');
+    if (!iframe.style) iframe.style = {};
+    iframe.style.display = 'none';
+    
+    document.body.appendChild(iframe);
+    
+    var win = iframe.contentWindow;
+    var wEval = win.eval, wExecScript = win.execScript;
+
+    if (!wEval && wExecScript) {
+        // win.eval() magically appears when this is called in IE:
+        wExecScript.call(win, 'null');
+        wEval = win.eval;
+    }
+    
+    forEach(Object_keys(context), function (key) {
+        win[key] = context[key];
+    });
+    forEach(globals, function (key) {
+        if (context[key]) {
+            win[key] = context[key];
+        }
+    });
+    
+    var winKeys = Object_keys(win);
+
+    var res = wEval.call(win, this.code);
+    
+    forEach(Object_keys(win), function (key) {
+        // Avoid copying circular objects like `top` and `window` by only
+        // updating existing context properties or new properties in the `win`
+        // that was only introduced after the eval.
+        if (key in context || indexOf(winKeys, key) === -1) {
+            context[key] = win[key];
+        }
+    });
+
+    forEach(globals, function (key) {
+        if (!(key in context)) {
+            defineProp(context, key, win[key]);
+        }
+    });
+    
+    document.body.removeChild(iframe);
+    
+    return res;
+};
+
+Script.prototype.runInThisContext = function () {
+    return eval(this.code); // maybe...
+};
+
+Script.prototype.runInNewContext = function (context) {
+    var ctx = Script.createContext(context);
+    var res = this.runInContext(ctx);
+
+    if (context) {
+        forEach(Object_keys(ctx), function (key) {
+            context[key] = ctx[key];
+        });
+    }
+
+    return res;
+};
+
+forEach(Object_keys(Script.prototype), function (name) {
+    exports[name] = Script[name] = function (code) {
+        var s = Script(code);
+        return s[name].apply(s, [].slice.call(arguments, 1));
+    };
+});
+
+exports.isContext = function (context) {
+    return context instanceof Context;
+};
+
+exports.createScript = function (code) {
+    return exports.Script(code);
+};
+
+exports.createContext = Script.createContext = function (context) {
+    var copy = new Context();
+    if(typeof context === 'object') {
+        forEach(Object_keys(context), function (key) {
+            copy[key] = context[key];
+        });
+    }
+    return copy;
+};
+
 
 /***/ })
 /******/ ]);

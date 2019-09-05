@@ -3,7 +3,8 @@ const path = require('path');
 module.exports = {
     mode: "production",
     entry: {
-        'blips': './blips/Component.jsx'
+        'blips': './blips/Component.jsx',
+        'grades': './grades/Component.jsx',
     },
     output: {
         path: path.resolve(__dirname, './'),
