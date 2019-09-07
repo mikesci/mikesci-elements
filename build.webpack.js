@@ -5,6 +5,7 @@ module.exports = {
     entry: {
         'blips': './blips/Component.jsx',
         'grades': './grades/Component.jsx',
+        'hitch-wait-guess': './hitch-wait-guess/Component.jsx'
     },
     output: {
         path: path.resolve(__dirname, './'),
