@@ -1,4 +1,5 @@
 [
+    "blips/component.js",
     "grades/component.js",
     "hitch-wait-guess/component.js"
 ]
