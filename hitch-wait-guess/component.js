@@ -1348,7 +1348,7 @@ function (_React$Component) {
           key: guess.user,
           className: "user-guess",
           style: {
-            backgroundColor: guess.color
+            backgroundColor: guess.color || "#FFFFFF"
           }
         }, guess.user[0]);
       }); // count the number of hidden guesses

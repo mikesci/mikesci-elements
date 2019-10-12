@@ -261,7 +261,7 @@ export default class extends React.Component {
         let timerString = this.getTimerString(this.state.timerValue);
 
         let guessBoxes = this.state.guesses.filter(r => r.displayState == this.DISPLAY_STATE_VISIBLE).map(guess => 
-            <div key={guess.user} className="user-guess" style={{ backgroundColor: guess.color }}>{guess.user[0]}</div>
+            <div key={guess.user} className="user-guess" style={{ backgroundColor: (guess.color || "#FFFFFF") }}>{guess.user[0]}</div>
         );
 
         // count the number of hidden guesses
