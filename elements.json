@@ -1,5 +1,8 @@
-[
-    "blips/component.js",
-    "grades/component.js",
-    "hitch-wait-guess/component.js"
-]
+{
+    "name": "Mikesci's Personal Elements",
+    "elements": [
+        "blips/component.js",
+        "grades/component.js",
+        "hitch-wait-guess/component.js"
+    ]
+}
